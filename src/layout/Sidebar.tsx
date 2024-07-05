@@ -25,12 +25,11 @@ const Sidebar = () => {
       <h1 style={{ textAlign: "center", color: "#FF8F00" }}>
         PORTFOLIO DASHBOARD
       </h1>
-      <Divider />
       <Menu
-        style={{ marginTop: "62px", paddingLeft: "8px", paddingRight: "8px" }}
+        style={{ marginTop: "56px", paddingLeft: "8px", paddingRight: "8px" }}
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["4"]}
+        defaultSelectedKeys={["1"]}
         items={sidebarItems}
       />
     </Sider>

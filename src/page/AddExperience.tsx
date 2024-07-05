@@ -5,10 +5,32 @@ import PForm from "../components/form/PForm";
 import PInput from "../components/form/PInput";
 import PSelected from "../components/form/PSelected";
 import { FrontEndTech } from "../types";
+import { imageUpload } from "../utils/ImageUpload";
+import { toast } from "sonner";
+import { useAddExperienceMutation } from "../redux/features/experienceApi";
 
 const AddExperience = () => {
-  const handleFormSubmit = (data: FieldValues) => {
-    console.log("Success:", data);
+  const [addExperience] = useAddExperienceMutation();
+
+  const handleFormSubmit = async (data: FieldValues) => {
+    const resData = {
+      companyName: data?.companyName,
+      jobTitle: data?.jobTitle,
+      location: data?.location,
+      startDate: data?.startDate,
+      endDate: data?.location,
+    };
+
+    const res = await addExperience(resData).unwrap();
+    if (res?.success) {
+      toast.success(res?.message);
+    }
+  };
+
+  const defaultValues = {
+    companyName: "",
+    jobTitle: "",
+    location: "",
   };
 
   return (
@@ -23,33 +45,25 @@ const AddExperience = () => {
           width: "50%",
           mx: "auto",
           pb: "8px",
+          fontFamily: "sans-serif",
         }}
       >
         Add Experience
       </Typography>
-      <PForm onSubmit={handleFormSubmit}>
+      <PForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
         <Grid container spacing={2} sx={{ my: 5 }}>
           <Grid item xs={12} sm={12} md={6}>
             <PInput
-              name="projectTitle"
-              label="Project Title"
+              name="companyName"
+              label="Company Name"
               fullWidth={true}
               sx={{ mb: 2 }}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <PInput
-              name="description"
-              label="Description"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={6}>
-            <PInput
-              name="liveLink"
-              label="LiveLink"
+              name="jobTitle"
+              label="Job Title"
               fullWidth={true}
               sx={{ mb: 2 }}
             />
@@ -57,53 +71,25 @@ const AddExperience = () => {
 
           <Grid item xs={12} sm={12} md={6}>
             <PInput
-              name="backEndGitHubLink"
-              label="Back End GitHub Link"
+              name="location"
+              label="Location"
               fullWidth={true}
               sx={{ mb: 2 }}
             />
           </Grid>
+
           <Grid item xs={12} sm={12} md={6}>
-            <PInput
-              name="projectImage"
-              label="Project Image"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <PInput
-              name="repositoryURL"
-              label="Front End GitHub Link"
+            <PDatePicker
+              name="startDate"
+              label="Start Date"
               fullWidth={true}
               sx={{ mb: 2 }}
             />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <PDatePicker
-              name="startDate"
-              label="Star tDate"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <PDatePicker name="endDate" label="End Date" sx={{ mb: 2 }} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <PSelected
-              items={FrontEndTech}
-              name="usedTechnologiesBackend"
-              label="Used Technologies Backend"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <PSelected
-              items={FrontEndTech}
-              name="usedTechnologiesFrontend"
-              label="Used Technologies Frontend"
+              name="endDate"
+              label="End Date"
               fullWidth={true}
               sx={{ mb: 2 }}
             />
