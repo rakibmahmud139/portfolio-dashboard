@@ -21,9 +21,9 @@ import { setToLocalStorage } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
-
   const [loginUser, { isLoading }] = useLoginMutation();
+
+  const navigate = useNavigate();
 
   const handleLogin = async (data: FieldValues) => {
     const res = await loginUser(data).unwrap();
