@@ -1,5 +1,5 @@
+import { FilledInputProps, SxProps, TextField } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
-import { SxProps, TextField } from "@mui/material";
 
 type TInputProps = {
   name: string;
@@ -10,6 +10,7 @@ type TInputProps = {
   sx?: SxProps;
   placeholder?: string;
   required?: boolean;
+  InputProps?: Partial<FilledInputProps>;
 };
 
 const PInput = ({
@@ -20,6 +21,7 @@ const PInput = ({
   fullWidth,
   sx,
   placeholder,
+  InputProps,
   required,
 }: TInputProps) => {
   const { control } = useFormContext();
@@ -40,6 +42,7 @@ const PInput = ({
           required={required}
           error={!!error?.message}
           helperText={error?.message}
+          InputProps={InputProps}
         />
       )}
     />

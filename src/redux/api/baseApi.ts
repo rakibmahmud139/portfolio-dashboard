@@ -5,7 +5,7 @@ import { getFromLocalStorage } from "../../utils/localStorage";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/",
+    baseUrl: "https://portfolio-server-chi-lemon.vercel.app/api/",
     prepareHeaders: (headers) => {
       const token = getFromLocalStorage(authKey);
 

@@ -41,7 +41,7 @@ const AddExperience = () => {
         color="#FF8F00"
         textAlign="center"
         sx={{
-          borderBottom: "1px solid #fff",
+          borderBottom: "1px solid blue",
           width: "50%",
           mx: "auto",
           pb: "8px",

@@ -4,11 +4,17 @@ import AddBlog from "../page/AddBlog";
 import AddExperience from "../page/AddExperience";
 import AddProject from "../page/AddProject";
 import AddSkill from "../page/AddSkill";
+import Login from "../page/Login";
+import ProtectorRoute from "./ProtectorRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <ProtectorRoute>
+        <App />
+      </ProtectorRoute>
+    ),
     children: [
       {
         path: "/",
@@ -27,5 +33,9 @@ export const router = createBrowserRouter([
         element: <AddBlog />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
