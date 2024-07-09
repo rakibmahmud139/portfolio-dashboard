@@ -11,7 +11,7 @@ import { BackEndTech, FrontEndTech } from "../types";
 import { imageUpload } from "../utils/ImageUpload";
 
 const AddProject = () => {
-  const [addProject] = useAddProjectMutation();
+  const [addProject, { isLoading }] = useAddProjectMutation();
 
   const handleFormSubmit = async (data: FieldValues) => {
     const projectImage = await imageUpload(data?.file);
@@ -148,7 +148,11 @@ const AddProject = () => {
             alignItems: "center",
           }}
         >
-          <Button type="submit" sx={{ background: "#FF8F00", color: "#fff" }}>
+          <Button
+            disabled={isLoading}
+            type="submit"
+            sx={{ background: "#FF8F00", color: "#fff" }}
+          >
             Add Project
           </Button>
         </Box>

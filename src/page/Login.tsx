@@ -11,14 +11,14 @@ import {
 } from "@mui/material";
 import Lottie from "lottie-react";
 import { FieldValues } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import PForm from "../components/form/PForm";
 import PInput from "../components/form/PInput";
 import LoginImg from "../login.json";
 import { useLoginMutation } from "../redux/features/authApi";
-import { toast } from "sonner";
 import { authKey } from "../types";
 import { setToLocalStorage } from "../utils/localStorage";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginMutation();
@@ -26,21 +26,31 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (data: FieldValues) => {
-    const res = await loginUser(data).unwrap();
+    try {
+      const res = await loginUser(data).unwrap();
 
-    if (res?.success && res?.data?.token) {
-      toast.success(res?.message);
-      setToLocalStorage(authKey, res?.data?.token);
-      navigate("/");
+      if (res?.success && res?.data?.token) {
+        toast.success(res?.message);
+        setToLocalStorage(authKey, res?.data?.token);
+        navigate("/");
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.errorMessage || "login failed");
     }
   };
+
+  const defaultValues = {
+    email: "",
+    password: "",
+  };
+
   return (
     <Box sx={{ background: "rgb(216, 239, 211)", height: "100vh" }}>
       <Container
         maxWidth="lg"
         sx={{
           display: { xs: "block", md: "flex" },
-          justifyContent: "center",
+          justifyContent: "space-evenly",
           alignItems: "center",
           paddingTop: { md: 8 },
         }}
@@ -60,12 +70,13 @@ const Login = () => {
             User Login
           </Typography>
           <Box sx={{ mt: { xs: "24px", md: 8 } }}>
-            <PForm onSubmit={handleLogin}>
+            <PForm onSubmit={handleLogin} defaultValues={defaultValues}>
               <PInput
                 required
                 fullWidth
                 size="medium"
                 label="Email"
+                type="email"
                 name="email"
                 InputProps={{
                   startAdornment: (

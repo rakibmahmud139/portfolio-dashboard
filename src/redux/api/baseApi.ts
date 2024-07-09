@@ -11,8 +11,6 @@ export const baseApi = createApi({
 
       if (token) {
         headers.set("authorization", `${token}`);
-      } else {
-        window.location.href = "/login";
       }
 
       return headers;

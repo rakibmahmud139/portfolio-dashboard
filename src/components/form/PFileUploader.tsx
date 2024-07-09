@@ -1,7 +1,7 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Input } from "@mui/material";
 import Button from "@mui/material/Button";
-import { SxProps, styled } from "@mui/material/styles";
+import { SxProps } from "@mui/material/styles";
 import { Controller, useFormContext } from "react-hook-form";
 
 type IProps = {

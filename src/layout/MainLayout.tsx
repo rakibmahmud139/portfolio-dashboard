@@ -1,4 +1,4 @@
-import { Layout, Typography } from "antd";
+import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 

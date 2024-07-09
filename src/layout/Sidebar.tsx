@@ -7,7 +7,7 @@ const sidebarItems = [
   { label: "Add Project", to: "/" },
   { label: "Add Skill", to: "/addSkill" },
   { label: "Add Experience", to: "/addExperience" },
-  { label: "Add Blog", to: "addBlog" },
+  { label: "Add Blog", to: "/addBlog" },
 ].map((item, index) => ({
   key: String(index + 1),
   label: <NavLink to={item.to}>{item.label}</NavLink>,

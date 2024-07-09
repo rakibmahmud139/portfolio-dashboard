@@ -14,7 +14,7 @@ const AddBlog = () => {
   const editor = useRef(null);
   const [content, setContent] = useState("");
 
-  const [addBlog] = useAddBlogMutation();
+  const [addBlog, { isLoading }] = useAddBlogMutation();
 
   const handleFormSubmit = async (data: FieldValues) => {
     const image = await imageUpload(data?.file);
@@ -124,7 +124,11 @@ const AddBlog = () => {
             alignItems: "center",
           }}
         >
-          <Button type="submit" sx={{ background: "#FF8F00", color: "#fff" }}>
+          <Button
+            disabled={isLoading}
+            type="submit"
+            sx={{ background: "#FF8F00", color: "#fff" }}
+          >
             Add Blog
           </Button>
         </Box>
